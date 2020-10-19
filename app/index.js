@@ -22,7 +22,7 @@ const store = new Vuex.Store({
   },
 });
 const vue = new Vue({
-  el: '.root',
+  el: '#products_section',
   render: (h) => h(app),
   store,
   data: {

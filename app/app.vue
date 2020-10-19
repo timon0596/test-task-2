@@ -1,5 +1,5 @@
 <template lang="pug">
-.app
+.products_page.pg_0
   productItem(v-for="(item, index) in products" :key="index" :product="item")
 </template>
 <script>
@@ -8,7 +8,7 @@
   export default {
     data(){
       return {
-        products:this.getProducts()
+        products:this.getProducts().slice(0,10)
       }
     },
     components: {
