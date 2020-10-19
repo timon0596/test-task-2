@@ -6,7 +6,9 @@ import app from './app.vue';
 
 require.context('./../Test_task_front2', true, /\.css$/);
 require.context('./../Test_task_front2', true, /\.(jpe?g|png|svg)$/);
-// require.context('./../Test_task_front2/misc/images', true, /\.(jpe?g|png|svg)$/);
+const ico = require.context('./', false, /\.(jpe?g|png|svg|ico)$/);
+
+console.log(ico);
 
 Vue.use(Vuex);
 const products = require('../Test_task_front2/products.json');

@@ -111,20 +111,10 @@ module.exports = {
         test: /\.vue$/,
         exclude: /node_modules/,
         loader: 'vue-loader',
-        // options: {
-        //     loaders: {
-        //       // css: ExtractTextPlugin.extract({
-        //       //               use: 'css-loader',
-        //       //               fallback: 'vue-style-loader'
-        //       //             }),
-        //       scss: 'vue-style-loader!css-loader!sass-loader', // <style lang="scss">
-        //       sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax' // <style lang="sass">
-        //     }
-        //   }
 
       },
       {
-        test: /\.(jpe?g|png|svg)$/i,
+        test: /\.(jpe?g|png|svg|ico)$/i,
         use: [
           {
             loader: 'file-loader',
@@ -167,6 +157,7 @@ module.exports = {
       new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: '[name].[hash].css',
+        ignoreOrder: false,
       }),
 
       new webpack.ProvidePlugin({
