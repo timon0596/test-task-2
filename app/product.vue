@@ -150,6 +150,8 @@
       grid-auto-flow: row
   .product_photo
     grid-area: img
+    width: auto
+    height: auto
   .product__top-contaier
     display: grid
     grid-auto-flow: column
