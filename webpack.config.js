@@ -151,6 +151,7 @@ module.exports = {
       new CopyPlugin({
         patterns: [
           { from: './Test_task_front2/misc/images', to: '' },
+          { from: './Test_task_front2/favicon.ico', to: '[path][name].[ext]' },
         ],
       }),
       new CleanWebpackPlugin(),
