@@ -161,10 +161,10 @@ module.exports = {
         ignoreOrder: false,
       }),
 
-      new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-      }),
+      // new webpack.ProvidePlugin({
+      //   $: 'jquery',
+      //   jQuery: 'jquery',
+      // }),
       new ExtractTextPlugin({
         filename: 'vue.style.css',
         allChunks: true,
