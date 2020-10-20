@@ -27,12 +27,12 @@
           p.product_price_default
             span.retailPrice {{this.priceRetail}}
       .product_price_points
-        p.ng-binding &Mcy;&ocy;&zhcy;&ncy;&ocy; &kcy;&ucy;&pcy;&icy;&tcy;&softcy; &zcy;&acy; {{(Math.random()*1000).toFixed(2)}} &bcy;&acy;&lcy;&lcy;&acy;
+        p.ng-binding &Mcy;&ocy;&zhcy;&ncy;&ocy; &kcy;&ucy;&pcy;&icy;&tcy;&softcy; &zcy;&acy; {{this.points}} &bcy;&acy;&lcy;&lcy;&acy;
       .product_units
         .unit--wrapper
-          .unit--select.unit--active
+          .unit--select(:class='{"unit--active": isAlt}' @click='this.unitAlt')
             p.ng-binding За {{this.product.unitAlt}}
-          .unit--select
+          .unit--select(:class='{"unit--active": !isAlt}' @click='this.unit')
             p.ng-binding За упаковку
       .product__wrapper
         .list--unit-desc
@@ -61,8 +61,17 @@
     },
     props:['product'],
     methods:{
+      unitAlt(){
+        this.isAlt=true
+      },
+      unit(){
+        this.isAlt = false
+      }
     },
     computed:{
+      points(){
+        return (Math.random()*1000).toFixed(2)
+      },
       imagePath(){
         return this.product.primaryImageUrl.match(/(.+)\.(.+)$/).slice(1,3).join('_220x220_1.')
       },
@@ -83,10 +92,10 @@
           })
       },
       priceGold(){
-        return this.isAlt?this.product.priceGoldAlt:this.product.priceGold
+        return this.isAlt?this.product.priceGold:this.product.priceGoldAlt
       },
       priceRetail(){
-        return this.isAlt?this.product.priceRetailAlt:this.product.priceRetail
+        return this.isAlt?this.product.priceRetail:this.product.priceRetailAlt
       },
     },
     mounted(){
@@ -110,7 +119,7 @@
     justify-content: start
     grid-template-areas: 'img code code''img descr price''img descr price'
     grid-gap: 10px
-    @media (max-width: 1280px)
+    @media (max-width: 1250px)
       grid-template-areas: 'img code price''img descr price''img descr price'
     @media (max-width: 1000px)
       grid-template-areas: 'code''img''descr''price'
@@ -122,7 +131,7 @@
     grid-auto-flow: column
     justify-content: space-between
     grid-area: code
-    @media (max-width: 1280px)
+    @media (max-width: 1250px)
       justify-content: start
       align-self: start
       align-items: baseline
@@ -139,6 +148,9 @@
     grid-area: price
     justify-items: end
     grid-gap: 10px
+    .product_price_points
+      @media (max-width: 1000px)
+        display: none
   .product_description
     min-height: 0
     width: 100%
@@ -208,4 +220,5 @@
   .product_tags
     width: 100%
     max-width: 505px
+
 </style>
