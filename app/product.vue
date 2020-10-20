@@ -27,7 +27,7 @@
           p.product_price_default
             span.retailPrice {{this.priceRetail}}
       .product_price_points
-        p.ng-binding &Mcy;&ocy;&zhcy;&ncy;&ocy; &kcy;&ucy;&pcy;&icy;&tcy;&softcy; &zcy;&acy; {{this.points}} &bcy;&acy;&lcy;&lcy;&acy;
+        p.ng-binding Можно купить за {{this.points}} балла
       .product_units
         .unit--wrapper
           .unit--select(:class='{"unit--active": isAlt}' @click='this.unitAlt')
@@ -44,9 +44,9 @@
                 span.unit--infoInn {{this.product.unitRatio}} {{this.product.unit}} = {{this.product.unitRatioAlt}} {{this.product.unitAlt}}
         .product_count_wrapper
           .stepper
-            input.product__count.stepper-input(type='text' value='1')
-            span.stepper-arrow.up
-            span.stepper-arrow.down
+            input.product__count.stepper-input(type='text' v-model:value='this.amount')
+            span.stepper-arrow.up(@click="this.increase")
+            span.stepper-arrow.down(@click="this.decrease")
           span.btn.btn_cart(data-url='/cart/' :data-product-id='productId')
             svg.ic.ic_cart
               use(xmlns:xlink='http://www.w3.org/1999/xlink' xlink:href='#cart')
@@ -57,6 +57,7 @@
     data(){
       return {
         isAlt:true,
+        amount: 1
       }
     },
     props:['product'],
@@ -66,9 +67,23 @@
       },
       unit(){
         this.isAlt = false
-      }
+      },
+      increase(){
+        this.amountComputed=this.amountComputed+1
+      },
+      decrease(){
+        this.amountComputed=this.amountComputed-1
+      } 
     },
     computed:{
+      amountComputed:{
+        get() {
+            return this.amount
+          },
+        set(value) {
+          this.amount=value<1?1:value
+        },
+      },
       points(){
         return (Math.random()*1000).toFixed(2)
       },
