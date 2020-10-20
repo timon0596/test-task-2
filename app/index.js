@@ -24,7 +24,7 @@ const store = new Vuex.Store({
   },
 });
 const vue = new Vue({
-  el: '#products_section',
+  el: '#products_section .test-task',
   render: (h) => h(app),
   store,
   data: {
