@@ -22,10 +22,10 @@
             br
             | клуба
           p.product_price_club_card
-            span.goldPrice {{this.priceGold}}
+            span.goldPrice {{this.priceGold}} ₽
         .product__price
           p.product_price_default
-            span.retailPrice {{this.priceRetail}}
+            span.retailPrice {{this.priceRetail}} ₽
       .product_price_points
         p.ng-binding Можно купить за {{this.points}} балла
       .product_units
