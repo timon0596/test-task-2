@@ -88,7 +88,7 @@
         return ((Math.random()*1000).toFixed(2)*this.amountComputed).toFixed(2)
       },
       imagePath(){
-        return this.product.primaryImageUrl.match(/(.+)\.(.+)$/).slice(1,3).join('_220x220_1.')
+        return 'https:'+this.product.primaryImageUrl.match(/(.+)\.(.+)$/).slice(1,3).join('_220x220_1.')
       },
       productId(){
         return this.product.productId
@@ -125,6 +125,9 @@
         }
       },
     },
+    mounted(){
+      console.log(this.imagePath)
+    }
   }
 </script>
 <style lang="sass">
@@ -140,7 +143,6 @@
   .product__info
     display: grid
     grid-auto-flow: column
-    justify-content: start
     grid-template-areas: 'img code code''img descr price''img descr price'
     grid-gap: 10px
     @media (max-width: 1250px)
