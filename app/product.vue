@@ -1,5 +1,5 @@
 <template lang="pug">
-.product.product_horizontal
+.product.product_horizontal(v-show='this.index<this.productsToShow')
   .product__info
     .product_photo
       a.url--link.product__link(href='#')
@@ -27,7 +27,7 @@
           p.product_price_default
             span.retailPrice {{this.priceRetail}}
       .product_price_points
-        p.ng-binding Можно купить за {{this.points*this.amountComputed}} балла
+        p.ng-binding Можно купить за {{this.points}} балла
       .product_units
         .unit--wrapper
           .unit--select(:class='{"unit--active": isAlt}' @click='this.unitAlt')
@@ -41,10 +41,10 @@
             .unit--desc-t
               p
                 span.ng-binding Продается упаковками:
-                span.unit--infoInn {{this.product.unitRatio}} {{this.product.unit}} = {{this.product.unitRatioAlt}} {{this.product.unitAlt}}
+                span.unit--infoInn 1 упак. = {{this.product.unitRatioAlt}} {{this.product.unitAlt}}
         .product_count_wrapper
           .stepper
-            input.product__count.stepper-input(type='text' v-model:value='this.amount')
+            input.product__count.stepper-input(type='text' v-model:value='amountComputed')
             span.stepper-arrow.up(@click="this.increase")
             span.stepper-arrow.down(@click="this.decrease")
           span.btn.btn_cart(data-url='/cart/' :data-product-id='productId')
@@ -60,7 +60,7 @@
         amount: 1
       }
     },
-    props:['product'],
+    props:['product','productsToShow','index'],
     methods:{
       unitAlt(){
         this.isAlt=true
@@ -85,7 +85,7 @@
         },
       },
       points(){
-        return (Math.random()*1000).toFixed(2)
+        return ((Math.random()*1000).toFixed(2)*this.amountComputed).toFixed(2)
       },
       imagePath(){
         return this.product.primaryImageUrl.match(/(.+)\.(.+)$/).slice(1,3).join('_220x220_1.')
@@ -125,9 +125,6 @@
         }
       },
     },
-    mounted(){
-      console.log(this.product)
-    }
   }
 </script>
 <style lang="sass">

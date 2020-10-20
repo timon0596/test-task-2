@@ -8,8 +8,6 @@ require.context('./../Test_task_front2', true, /\.css$/);
 require.context('./../Test_task_front2', true, /\.(jpe?g|png|svg)$/);
 const ico = require.context('./', false, /\.(jpe?g|png|svg|ico)$/);
 
-console.log(ico);
-
 Vue.use(Vuex);
 const products = require('../Test_task_front2/products.json');
 
@@ -32,5 +30,8 @@ const vue = new Vue({
   methods: {
   },
   mounted() {
+    this.$on('intersectionhappened', () => {
+      console.log(1111111111111);
+    });
   },
 });
