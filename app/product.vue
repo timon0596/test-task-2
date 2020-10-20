@@ -27,7 +27,7 @@
           p.product_price_default
             span.retailPrice {{this.priceRetail}}
       .product_price_points
-        p.ng-binding Можно купить за {{this.points}} балла
+        p.ng-binding Можно купить за {{this.points*this.amountComputed}} балла
       .product_units
         .unit--wrapper
           .unit--select(:class='{"unit--active": isAlt}' @click='this.unitAlt')
@@ -107,10 +107,22 @@
           })
       },
       priceGold(){
-        return this.isAlt?this.product.priceGold:this.product.priceGoldAlt
+        if(this.isAlt){
+          let val = this.product.priceGold*this.amountComputed+''
+          return val.length>9?val.slice(0,9):val
+        }else{
+          let val = this.product.priceGoldAlt*this.amountComputed+''
+          return val.length>9?val.slice(0,9):val
+        }
       },
       priceRetail(){
-        return this.isAlt?this.product.priceRetail:this.product.priceRetailAlt
+        if(this.isAlt){
+          let val = this.product.priceRetail*this.amountComputed+''
+          return val.length>9?val.slice(0,9):val
+        }else{
+          let val = this.product.priceRetailAlt*this.amountComputed+''
+          return val.length>9?val.slice(0,9):val
+        }
       },
     },
     mounted(){
@@ -127,7 +139,7 @@
 .product.product_horizontal
   padding: 10px 10px 40px
   @media (max-width: 1000px)
-    width: min-content
+    width: 242px
   .product__info
     display: grid
     grid-auto-flow: column
